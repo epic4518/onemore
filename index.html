@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Surprise</title>
+    <style>
+        /* Loving Vibe Background */
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            overflow: hidden;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 85%;
+            max-width: 350px;
+            border: 2px solid #ff385c;
+            z-index: 10;
+        }
+
+        /* The buttons */
+        .btn {
+            background: #ff385c;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 56, 92, 0.3);
+            margin-top: 20px;
+        }
+
+        .btn:active { transform: scale(0.95); }
+
+        .hidden { display: none !important; }
+
+        /* Floating Hearts */
+        .heart {
+            position: absolute;
+            bottom: -10%;
+            color: rgba(255, 255, 255, 0.7);
+            user-select: none;
+            pointer-events: none;
+            animation: float Up 5s linear forwards;
+        }
+
+        @keyframes floatUp {
+            to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="mySong" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/nothing00-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="p1" class="card">
+        <h1 style="color: #e73c7e;">Hey You! ❤️</h1>
+        <p>I made something special for you. Want to see?</p>
+        <button class="btn" onclick="showNext('p1', 'p2')">Click to Start</button>
+    </div>
+
+    <div id="p2" class="card hidden">
+        <h1 style="color: #e73c7e;">kuchh nhi h hahahah🤣 </h1>
+        <p>Are you sure you're ready for this much love?</p>
+        <button class="btn" onclick="showNext('p2', 'p3')">Yes, I'm Ready!</button>
+    </div>
+
+    <div id="p3" class="card hidden">
+        <h1 style="color: #e73c7e;">✨ Happy Birthday Bhawna! ✨</h1>
+        <p>I wish you a life full of laughter and love. Cheers to another amazing year !✨🌸</p>
+        <p style="font-size: 0.8rem; color: #666;">(Turn your volume mute! 🎵)</p>
+    </div>
+
+    <script>
+        function showNext(currentId, nextId) {
+            // 1. Play Music (Must be triggered by a click)
+            const audio = document.getElementById('mySong');
+            audio.play().catch(err => console.log("Audio waiting for interaction"));
+
+            // 2. Switch Pages
+            document.getElementById(currentId).classList.add('hidden');
+            document.getElementById(nextId).classList.remove('hidden');
+
+            // 3. Start Heart Rain
+            makeHearts();
+        }
+
+        function makeHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+
+MAXDOME, [02-02-2026 04:45]
+heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }, 200);
+        }
+    </script>
+</body>
+</html>
